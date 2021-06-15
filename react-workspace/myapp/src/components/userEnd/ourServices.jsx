@@ -33,12 +33,12 @@ class ourServices extends Component {
             </div>
 
             <div class="row ">
-              <div class="col-sm-4">
+              <div class="col-m-1 mr-3 shadow ">
                 <div
-                  class="card m-4 bg-info"
+                  class="card m-2 bg-info"
                   style={{
                     width: "21rem",
-                    height: "13rem",
+                    height: "14rem",
                     //background: "deepskyblue ",
                   }}
                 >
@@ -52,12 +52,12 @@ class ourServices extends Component {
                 </div>
               </div>
 
-              <div class="col-sm-4">
+              <div class="col-m-1 mr-3 shadow">
                 <div
-                  class="card m-4 bg-info"
+                  class="card m-2 bg-info"
                   style={{
                     width: "21rem",
-                    height: "13rem",
+                    height: "14rem",
                     //background: "deepskyblue  ",
                   }}
                 >
@@ -73,12 +73,12 @@ class ourServices extends Component {
                 </div>
               </div>
 
-              <div class="col-sm-4">
+              <div class="col-m-1 mr-3 shadow">
                 <div
-                  class="card  m-4 bg-info"
+                  class="card m-2 bg-info"
                   style={{
                     width: "21rem",
-                    height: "13rem",
+                    height: "14rem",
                     //background: "deepskyblue  ",
                   }}
                 >
@@ -92,12 +92,12 @@ class ourServices extends Component {
                 </div>
               </div>
 
-              <div class="col-sm-4">
+              <div class="col-m-1 mr-3 mt-4 shadow">
                 <div
-                  class="card  m-4 bg-info"
+                  class="card m-2 bg-info"
                   style={{
                     width: "21rem",
-                    height: "13rem",
+                    height: "14rem",
                     //background: "deepskyblue  ",
                   }}
                 >
@@ -111,12 +111,12 @@ class ourServices extends Component {
                 </div>
               </div>
 
-              <div class="col-sm-4">
+              <div class="col-m-1 mr-3 mt-4 shadow">
                 <div
-                  class="card m-4 bg-info"
+                  class="card m-2 bg-info"
                   style={{
                     width: "21rem",
-                    height: "13rem",
+                    height: "14rem",
                     //background: "deepskyblue  ",
                   }}
                 >
@@ -133,12 +133,12 @@ class ourServices extends Component {
                 </div>
               </div>
 
-              <div class="col-sm-4">
+              <div class="col-m-1 mr-3 mt-4 shadow">
                 <div
-                  class="card style m-4 bg-info"
+                  class="card m-2 bg-info"
                   style={{
                     width: "21rem",
-                    height: "13rem",
+                    height: "14rem",
                     //background: "deepskyblue  ",
                   }}
                 >
@@ -157,22 +157,23 @@ class ourServices extends Component {
             </div>
           </div>
         </section>
+
         <div
-        class=" text-center bg-dark"
-        style={{
-          color: "white",
-          marginTop: "1rem",
-          padding: "1rem",
-          bottom: 0,
-          left: 0,
-          width: "100%",
-        }}
-      >
-        <p>
-          © 2021 HSM Group. All Rights Reserved
-          <NavLink to="#"> Privacy Terms</NavLink>
-        </p>
-      </div>
+          class=" text-center bg-dark"
+          style={{
+            color: "white",
+            marginTop: "1rem",
+            padding: "1rem",
+            bottom: 0,
+            left: 0,
+            width: "100%",
+          }}
+        >
+          <p>
+            © 2021 HSM Group. All Rights Reserved
+            <NavLink to="#"> Privacy Terms</NavLink>
+          </p>
+        </div>
       </div>
     );
   }

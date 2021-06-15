@@ -5,6 +5,7 @@ import _ from "lodash";
 
 class Patients extends Component {
   state = {
+    //Creation of patient list
     patients: [],
     sortColumn: { path: "title", order: "asc" },
     search: "",
@@ -19,6 +20,7 @@ class Patients extends Component {
       updatedAt: "",
     },
   };
+  //Calling response for getAllPatients
   componentDidMount() {
     PatientService.getAllPatients().then((res) => {
       console.log("data: ", res.data);
@@ -26,7 +28,7 @@ class Patients extends Component {
     });
     console.log("patients: ", this.state.patients);
   }
-
+  //Delete patient by id
   deletePatient = (id) => {
     console.log("Delete patient with id: " + id);
     const patients = this.state.patients.filter(
@@ -35,7 +37,7 @@ class Patients extends Component {
     this.setState({ patients });
     PatientService.deletePatient(id);
   };
-
+  //Get patientById
   viewPatient = () => {
     let patients = [];
     PatientService.getPatientById(this.state.search).then((res) => {
@@ -57,6 +59,7 @@ class Patients extends Component {
   };
 
   render() {
+    //sorting patients by patientId
     const { search, sortColumn, patients } = this.state;
     var sorted = [];
     if (search) {
@@ -71,6 +74,7 @@ class Patients extends Component {
     console.log(this.state.patients);
     console.log("Sorted..", sorted);
     return (
+      //form for patient to search,add,update, delete
       <div className="w-75 mt-5 mx-auto">
         <div className="d-flex justify-content-between">
           <Link to="/patients/add" className="btn btn-secondary btn-large mb-1">
@@ -84,6 +88,7 @@ class Patients extends Component {
               aria-label="Search"
               onChange={this.onChange}
             />
+            {/* Button to search the patient by Id  */}
             <button
               className="btn btn-outline-success my-2 my-sm-0"
               type="button"
@@ -124,9 +129,10 @@ class Patients extends Component {
                 <td>{patient.updatedAt}</td>
                 <td>
                   <Link to={`/patients/update/${patient.patientId}`}>
+                    {/* Button to update the patient  */}
                     <button className="btn btn-secondary">Update</button>
                   </Link>
-
+                  {/* Button to delete the patient  */}
                   <button
                     className="btn btn-danger ml-2"
                     onClick={() => this.deletePatient(patient.patientId)}

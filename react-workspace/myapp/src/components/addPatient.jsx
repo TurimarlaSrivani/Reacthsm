@@ -3,6 +3,7 @@ import patientService from "../services/patientService";
 
 class AddPatient extends Component {
   state = {
+    //Creation of patient object
     patient: {
       patientId: "",
       patientName: "",
@@ -13,6 +14,7 @@ class AddPatient extends Component {
       updatedAt: "",
     },
   };
+  //Handling the submission and pushing the code to database
   handleSubmit = (event) => {
     event.preventDefault();
     console.log("Submitted");
@@ -20,6 +22,7 @@ class AddPatient extends Component {
       this.props.history.push("/patients");
     });
   };
+  //Handling the changes of the patient form
   handleChange = (event) => {
     const patient = { ...this.state.patient };
     // dynamically handling event changes
@@ -28,6 +31,7 @@ class AddPatient extends Component {
   };
 
   render() {
+    //Creation of form for add patient
     return (
       <div className="w-50 mx-auto">
         <form onSubmit={this.handleSubmit}>
@@ -140,7 +144,7 @@ class AddPatient extends Component {
               onChange={this.handleChange}
             />
           </div>
-
+          {/* Button to submit the  details of patient */}
           <button type="submit" className="btn btn-primary">
             Submit
           </button>

@@ -4,6 +4,7 @@ import DietService from "../services/dietService";
 class DietDetails extends Component {
 
         state = {
+          //Creation of diet object
           diet: {
            dietType: "",
             foodtoEat: "",
@@ -11,20 +12,20 @@ class DietDetails extends Component {
             
           },
         };
-
+  //Calling response for getDietById
   componentDidMount() {
     DietService.viewDiet(this.props.match.params.id).then((res) => 
       this.setState({ diet: res.data })
       );
   }
-
+ //Handling the changes of the diet form
   handleChange = (event) => {
       event.preventDefault();
       const diet = this.state.diet;
     diet[event.currentTarget.name] = event.currentTarget.value;
       this.setState({ diet });
   };
-
+ //Handling the submission and pushing the code to database
   handleSubmit = (event) => {
       event.preventDefault();
       console.log(this.state.diet);
@@ -37,6 +38,7 @@ class DietDetails extends Component {
     };
     
     render() {
+       //Creation of form for update diet
         return (
             <div>
                 <form onSubmit={this.handleSubmit} className="w-75 mx-auto">
@@ -84,9 +86,11 @@ class DietDetails extends Component {
 
             
           </div>
+           {/* Button for updating the  details of diet */}
           <button type="submit" className="btn btn-primary float-right">
             Save
           </button>
+           {/* Button for cancel the  details of diet */}
           <button
             className="btn btn-secondary mr-2 float-right"
             onClick={() => {

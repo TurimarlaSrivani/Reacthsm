@@ -6,46 +6,43 @@ class UpdateUser extends Component {
 
         this.state={
             userid:this.props.match.params.userid,
-            firstname:'',
-            lastname:'',
+            userName:'',
             email:'',
             password:'',
-            mobileNumber:''
+            mobileNo:'',
+            role:''
         }
         this.changeUserIdHandler=this.changeUserIdHandler.bind(this);
-        this.changeFirstNameHandler=this.changeFirstNameHandler.bind(this);
-        this.changeLastNameHandler=this.changeLastNameHandler.bind(this);
+        this.changeUserNameHandler=this.changeUserNameHandler.bind(this);
         this.changeEmailHandler=this.changeEmailHandler.bind(this);
         this.changePasswordHandler=this.changePasswordHandler.bind(this);
-        this.changeMobileNumberHandler=this.changeMobileNumberHandler.bind(this);
+        this.changeMobileNoHandler=this.changeMobileNoHandler.bind(this);
+        this.changeRoleHandler=this.changeRoleHandler.bind(this);
         this.editUser=this.editUser.bind(this);
     }
     componentDidMount(){
         UserService.viewUser(this.state.userid).then((res) =>{
             let user=res.data;
-            this.setState({firstname:user.firstname,lastname:user.lastname,email:user.email,password:user.password, mobileNumber:user.mobileNumber
+            this.setState({username:user.userName,email:user.email,password:user.password, mobileNo:user.mobileNo,role:user.role
 
             });
         });
     }
     editUser= (e) =>{
         e.preventDefault();
-        let user ={userid:this.state.userid,firstname:this.state.firstname,lastname:this.state.lastname,email:this.state.email,password:this.state.password,mobileNumber:this.state.mobileNumber};
+        let user ={userid:this.state.userid,userName:this.state.userName,email:this.state.email,password:this.state.password,mobileNo:this.state.mobileNo,role:this.state.role};
         console.log('user => '+JSON.stringify(user));
 
         UserService.updateUser(user,this.state.userid).then((res) => {
-            this.props.history.push(`/users`);
+            this.props.history.push(`/user`);
       });
 
   }
     changeUserIdHandler =(event) =>{
         this.setState({userid:event.target.value});
     }
-    changeFirstNameHandler= (event) => {
-        this.setState({firstname:event.target.value});
-    }
-    changeLastNameHandler =(event) => {
-        this.setState({lastname:event.target.value});
+    changeUserNameHandler= (event) => {
+        this.setState({username:event.target.value});
     }
     changeEmailHandler =(event) => {
         this.setState({email:event.target.value});
@@ -54,11 +51,14 @@ class UpdateUser extends Component {
         this.setState({password:event.target.value});
     }
     
-    changeMobileNumberHandler =(event) => {
-        this.setState({mobileNumber:event.target.value});
+    changeMobileNoHandler =(event) => {
+        this.setState({mobileNo:event.target.value});
+    }
+    changeRoleHandler =(event) => {
+        this.setState({role:event.target.value});
     }
     cancel(){
-        this.props.history.push('/users');
+        this.props.history.push('/user');
     }
 render(){
     return(
@@ -77,12 +77,8 @@ render(){
                                       <input placeholder="UserId" name="userid" className="form-control" value={this.state.userid} onChange={this.changeUserIdHandler}/>
                                   </div>
                                   <div className="form-group">
-                                      <label>FirstName</label>
-                                      <input placeholder="FirstName" name="firstname" className="form-control" value={this.state.firstname} onChange={this.changeFirstNameHandler}/>
-                                  </div>
-                                  <div className="form-group">
-                                      <label>LastName</label>
-                                      <input placeholder="LastName" name="lastname" className="form-control" value={this.state.lastname} onChange={this.changeLastNameHandler}/>
+                                      <label>UserName</label>
+                                      <input placeholder="UserName" name="username" className="form-control" value={this.state.username} onChange={this.changeUserNameHandler}/>
                                   </div>
                                   <div className="form-group">
                                       <label>Email</label>
@@ -95,7 +91,11 @@ render(){
                                  
                                   <div className="form-group">
                                       <label>MobileNumber</label>
-                                      <input placeholder="MobileNumber" name="mobileNumber" className="form-control" value={this.state.mobileNumber} onChange={this.changeMobileNumberHandler}/>
+                                      <input placeholder="MobileNo" name="mobileNo" className="form-control" value={this.state.mobileNo} onChange={this.changeMobileNoHandler}/>
+                                  </div>
+                                  <div className="form-group">
+                                      <label>Role</label>
+                                      <input placeholder="Role" name="role" className="form-control" value={this.state.role} onChange={this.changeRoleHandler}/>
                                   </div>
                                   <button className="btn btn-success" onClick={this.editUser.bind(this)}>Update</button>
                                   <button className="btn btn-danger"  onClick={this.cancel.bind(this)} style={{marginLeft:"10px"}}>Cancel</button>

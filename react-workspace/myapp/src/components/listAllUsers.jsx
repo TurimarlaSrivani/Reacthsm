@@ -51,10 +51,10 @@ updateUser(userid){
                 <table className="table table-striped">
                   <thead>
                     <tr>
-                      <th>FirstName</th>
-                      <th>LastName</th>
+                      <th>UserName</th>
                       <th>Email</th>
                       <th>MobileNumber</th>
+                      <th>Role</th>
                       <th>Actions</th>
                       </tr>
   

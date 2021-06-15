@@ -3,9 +3,9 @@ import PatientCaseService from "../services/patientCaseService";
 import{Link} from "react-router-dom";
 import _ from "lodash";
 
-//imrc & cc
 class PatientCase extends Component {
     state = {
+      //Creation of PatientCase list
         patientCases: [],
         sortColumn:{path:"title",order:"asc"},
         search: "",
@@ -19,7 +19,7 @@ class PatientCase extends Component {
             patientId: "",
         }
     };
-
+    //Calling response for showAllPatientCase
     componentDidMount() {
         PatientCaseService.showAllPatientCase().then((res)=> {
           console.log("data: ", res.data);
@@ -27,7 +27,7 @@ class PatientCase extends Component {
         });
         console.log("patientCases: ", this.state.patientCases);
     }
-
+    //Delete PatientCase by patientcaseid
      deletePatientCase = (patientCaseId) => {
          console.log("Delete patientCase with id:" +patientCaseId);
          const patientCases = this.state.patientCases.filter(
@@ -36,7 +36,7 @@ class PatientCase extends Component {
          this.setState({ patientCases });
          PatientCaseService.deletePatientCase(patientCaseId);
      };
-
+     //Get patientCaseById
      viewPatientCase = () => {
          let patientCases = [];
          PatientCaseService.getPatientCaseById(this.state.search).then((res) => {
@@ -58,6 +58,7 @@ class PatientCase extends Component {
      };
 
      render() {
+       //sorting PatientCase by patientcaseId
         const { search, sortColumn,patientCases } = this.state;
         var sorted = [];
         if (search) {
@@ -71,6 +72,7 @@ class PatientCase extends Component {
         console.log(this.state.patientCases);
         console.log("Sorted..", sorted);
         return (
+          //form for PatientCase to search,add,update, delete
           <div className="w-75 mt-5 mx-auto">
             <div className="d-flex justify-content-between">
               <Link to="/patientCase/add" className="btn btn-secondary btn-large mb-1">
@@ -142,8 +144,10 @@ class PatientCase extends Component {
 
                     <td>
                       <Link to={`/patientCase/updatePatientCase/${patientCase.patientCaseId}`}>
+                        {/* Button to update the PatientCase  */}
                         <button className="btn btn-secondary ml-1">Update</button>
                       </Link>
+                      {/* Button to delete the PatientCase  */}
                       <button
                         className="btn btn-danger ml-1 mt-1"
                         onClick={() => this.deletePatientCase(patientCase.patientCaseId)}

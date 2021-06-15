@@ -3,6 +3,7 @@ import dietService from "../services/dietService";
 
 class AddDiet extends Component {
   state = {
+    //Creation of diet object
     diet: {
       dietId:"",
       dietType: "",
@@ -10,6 +11,7 @@ class AddDiet extends Component {
       dietDuration: "",
     },
   };
+  //Handling the submission and pushing the code to database
   handleSubmit = (event) => {
     event.preventDefault();
     console.log("Submitted");
@@ -17,6 +19,7 @@ dietService.addDiet(this.state.diet).then((res) => {
       this.props.history.push("/diet");
     });
   };
+   //Handling the changes of the diet form
   handleChange = (event) => {
     const diet = { ...this.state.diet };
     // dynamically handling event changes
@@ -24,6 +27,7 @@ dietService.addDiet(this.state.diet).then((res) => {
     this.setState({ diet });
   };
   render() {
+    //Creation of form for add diet
     return (
       <div className="w-50 mx-auto">
         <form onSubmit={this.handleSubmit}>
@@ -83,7 +87,7 @@ dietService.addDiet(this.state.diet).then((res) => {
               onChange={this.handleChange}
             />
           </div>
-      
+          {/* Button to submit the  details of diet */}
          <button type="submit" className="btn btn-primary">
             Submit
           </button>

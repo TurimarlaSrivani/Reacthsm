@@ -3,6 +3,7 @@ import PolicyService from "../services/policyService";
 
 class AddPolicy extends Component {
   state = {
+    //Creation of policy object
     policy: {
       policyId: "",
       policyName: "",
@@ -11,6 +12,7 @@ class AddPolicy extends Component {
       maximumAmount: "",
     },
   };
+  //Handling the submission and pushing the code to database
   handleSubmit = (event) => {
     event.preventDefault();
     console.log("Submitted");
@@ -18,6 +20,7 @@ class AddPolicy extends Component {
       this.props.history.push("/policies");
     });
   };
+  //Handling the changes of the policy form
   handleChange = (event) => {
     const policy = { ...this.state.policy };
     // dynamically handling event changes
@@ -25,6 +28,7 @@ class AddPolicy extends Component {
     this.setState({ policy });
   };
   render() {
+    //Creation of form for add policy
     return (
       <div className="w-50 mx-auto">
         <form onSubmit={this.handleSubmit}>
@@ -96,7 +100,7 @@ class AddPolicy extends Component {
               onChange={this.handleChange}
             />
           </div>
-
+          {/* Button to submit the  details of policy */}
           <button type="submit" className="btn btn-primary">
             Submit
           </button>

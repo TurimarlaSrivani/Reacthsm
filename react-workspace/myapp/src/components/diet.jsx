@@ -5,6 +5,7 @@ import _ from "lodash";
 
 class Diet extends Component {
   state = {
+    //Creation of diet list
 diets: [],
     sortColumn: { path: "title", order: "asc" },
     search: "",
@@ -15,6 +16,7 @@ diets: [],
       
     },
   };
+  //Calling response for showAllDiets
   componentDidMount() {
     DietService.showAllDiet().then((res) => 
     {
@@ -23,7 +25,7 @@ diets: [],
     });
     console.log("diets: ", this.state.diets);
   }
-
+//Delete diet by dietid
   deleteDiet = (id) => {
     console.log("Delete diet with id: " + id);
     const diets = this.state.diets.filter(
@@ -32,7 +34,7 @@ diets: [],
     this.setState({ diets });
     DietService.deleteDiet(id);
   };
-
+//Get dietById
   viewDiet = () => {
     let diets = [];
     DietService.viewDiet(this.state.search).then((res) => {
@@ -54,6 +56,7 @@ diets: [],
   };
 
   render() {
+    //sorting diets by dietId
     const { search, sortColumn,diets } = this.state;
     var sorted = [];
     if (search) {
@@ -67,6 +70,7 @@ diets: [],
     console.log(this.state.diets);
     console.log("Sorted..", sorted);
     return (
+      //form for diet to search,add,update, delete
       <div className="w-75 mt-5 mx-auto">
         <div className="d-flex justify-content-between">
           <Link to="/diet/add" className="btn btn-secondary btn-large mb-1">
@@ -120,8 +124,10 @@ diets: [],
                 <td>{diet.dietDuration}</td>
                 <td>
                   <Link to={`/diet/update/${diet.dietId}`}>
+                    {/* Button to update the diet  */}
                     <button className="btn btn-secondary">Update</button>
                   </Link>
+                   {/* Button to delete the diet  */}
                   <button
                     className="btn btn-danger ml-2"
                     onClick={() => this.deleteDiet(diet.dietId)}

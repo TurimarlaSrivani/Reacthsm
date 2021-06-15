@@ -6,24 +6,24 @@ class ViewUser extends Component {
 
         this.state={
             userid:this.props.match.params.userid,
-            firstname:'',
-            lastname:'',
+            username:'',
             email:'',
             password:'',
-            mobileNumber:''
+            mobileNumber:'',
+            role:''
         }
     }
        
     componentDidMount(){
         UserService.viewUser(this.state.userid).then((res) =>{
             let user=res.data;
-            this.setState({firstname:user.firstname,lastname:user.lastname,email:user.email,password:user.password, mobileNumber:user.mobileNumber
+            this.setState({username:user.username,email:user.email,password:user.password, mobileNumber:user.mobileNumber,role:user.role
 
             });
         });
     }   
     back(){
-        this.props.history.push('/users');
+        this.props.history.push('/user');
     }  
      
     render() { 
@@ -41,12 +41,8 @@ class ViewUser extends Component {
                         </div>
                         
                         <div className ="row">
-                            <label><b>User FirstName: </b></label>
-                            <div>{this.state.firstname}</div>
-                        </div>
-                        <div className ="row">
-                            <label><b> User LastName: </b> </label>
-                            <div>{this.state.lastname}</div>
+                            <label><b>User Name: </b></label>
+                            <div>{this.state.username}</div>
                         </div>
                         <div className ="row">
                             <label><b>User Email: </b></label>
@@ -55,6 +51,10 @@ class ViewUser extends Component {
                         <div className ="row">
                             <label><b>User MobileNumber: </b></label>
                             <div>{this.state.mobileNumber}</div>
+                        </div>
+                        <div className ="row">
+                            <label><b> Role: </b> </label>
+                            <div>{this.state.role}</div>
                         </div>
                         <button className="btn btn-dark"  onClick={this.back.bind(this)} style={{marginLeft:"20px"}}>Back</button>
 

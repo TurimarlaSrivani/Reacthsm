@@ -3,6 +3,7 @@ import DoctorService from "../services/doctorService";
 
 class DoctorDetails extends Component {
   state = {
+    //Creation of doctor object
     doctor: {
         doctorName: "",
         contactNumber: "",
@@ -13,19 +14,23 @@ class DoctorDetails extends Component {
         doctorFee: "",
     },
   };
+  
+  //Calling response for getDoctorById
   componentDidMount() {
     DoctorService.getDoctorById(this.props.match.params.doctorId).then(
       (res) => this.setState({ doctor: res.data })
     );
   }
 
+  //Handling the changes of the doctor form
   handleChange = (event) => {
     event.preventDefault();
     const doctor = this.state.doctor;
     doctor[event.currentTarget.name] = event.currentTarget.value;
     this.setState({ doctor });
   };
-
+  
+  //Handling the submission and pushing the code to database
   handleSubmit = (event) => {
     event.preventDefault();
     console.log(this.state.doctor);
@@ -38,6 +43,7 @@ class DoctorDetails extends Component {
   };
 
   render() {
+    //Creation of form for update doctor
     return (
       <div>
         <form onSubmit={this.handleSubmit} className="w-75 mx-auto">
@@ -137,9 +143,11 @@ class DoctorDetails extends Component {
               onChange={this.handleChange}
             />
           </div>
+          {/* Button for updating the  details of doctor */}
           <button type="submit" className="btn btn-primary float-right">
             Save
           </button>
+          {/* Button to cancel the  details of doctor */}
           <button
             className="btn btn-secondary mr-2 float-right"
             onClick={() => {

@@ -5,6 +5,7 @@ import _ from "lodash";
 
 class Finance extends Component {
   state = {
+    //Creation of finance list
     finances: [],
     sortColumn: { path: "title", order: "asc" },
     search: "",
@@ -17,6 +18,7 @@ class Finance extends Component {
       totalFee: "",
     },
   };
+  //Calling response for showAllFinance
   componentDidMount() {
     FinanceService.findAllFinanceDetails().then((res) => {
       console.log("data: ", res.data);
@@ -24,6 +26,7 @@ class Finance extends Component {
     });
     console.log("finances: ", this.state.finances);
   }
+   //Delete finance by id
   deleteFinance = (financeId) => {
     console.log("Delete finance with ID: " + financeId);
     const finances = this.state.finances.filter(
@@ -32,6 +35,7 @@ class Finance extends Component {
     this.setState({ finances });
     FinanceService.deleteFinance(financeId);
   };
+  //Get financeById
   viewFinance = () => {
     let finances = [];
     FinanceService.findByFinanceId(this.state.search).then((res) => {
@@ -53,6 +57,7 @@ class Finance extends Component {
   };
 
   render() {
+    //sorting finance by financeId
     const { search, sortColumn, finances } = this.state;
     var sorted = [];
     if (search) {
@@ -67,6 +72,7 @@ class Finance extends Component {
     console.log(this.state.finances);
     console.log("Sorted..", sorted);
     return (
+      //form for finance to search,add,update, delete
       <div className="w-75 mt-5 mx-auto">
         <div className="d-flex justify-content-between">
           <Link

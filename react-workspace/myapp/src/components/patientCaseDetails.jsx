@@ -3,6 +3,7 @@ import PatientCaseService from "../services/patientCaseService";
 
 class PatientCaseDetails extends Component{
     state = {
+        //Creation of patientCase object
         patientCase: {
             
             medicines: "",
@@ -14,19 +15,20 @@ class PatientCaseDetails extends Component{
             patientId: "",
         },
      };
+     //Calling response for getpatientCaseById
     componentDidMount(){
         PatientCaseService.getPatientCaseById(this.props.match.params.patientCaseId).then((res)=>
          this.setState({ patientCase:res.data })
         ); 
     } 
-
+    //Handling the changes of the patientCase form
     handleChange=(event)=>{
         event.preventDefault();
         const patientCase=this.state.patientCase;
         patientCase[event.currentTarget.name]=event.currentTarget.value;
         this.setState({ patientCase });
     };
-
+    //Handling the submission and pushing the code to database
     handleSubmit=(event)=>{
         event.preventDefault();
         console.log(this.state.patientCase);
@@ -38,6 +40,7 @@ class PatientCaseDetails extends Component{
         });
     };
     render(){
+         //Creation of form for update patientCase
         return(
             <div>
               <form onSubmit={this.handleSubmit} className="w-75 mx-auto">
@@ -134,9 +137,11 @@ class PatientCaseDetails extends Component{
                         onChange={this.handleChange}
                       />  
                   </div>
+                  {/* Button for updating the  details of patientCase */}
                   <button type="submit" className="btn btn-primary float-right">
                       Save
                   </button>
+                  {/* Button to cancel the  details of patientCase */}
                   <button
                     className="btn btn-secondary mr-2 float-right"
                     onClick={()=>{

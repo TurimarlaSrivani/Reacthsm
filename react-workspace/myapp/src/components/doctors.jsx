@@ -5,6 +5,7 @@ import _ from "lodash";
 
 class Doctors extends Component {
   state = {
+     //Creation of doctor list
     doctors: [],
     sortColumn: { path: "title", order: "asc" },
     search: "",
@@ -19,6 +20,7 @@ class Doctors extends Component {
       doctorFee: "",
     },
   };
+  //Calling response for getAllDoctors
   componentDidMount() {
     DoctorService.getAllDoctors().then((res) => {
       console.log("data: ", res.data);
@@ -26,6 +28,7 @@ class Doctors extends Component {
     });
     console.log("doctors: ", this.state.doctors);
   }
+  //Delete doctor by doctorid
   deleteDoctor = (doctorId) => {
     console.log("Delete doctor with ID: " + doctorId);
     const doctors = this.state.doctors.filter(
@@ -34,6 +37,7 @@ class Doctors extends Component {
     this.setState({ doctors });
     DoctorService.deleteDoctor(doctorId);
   };
+  //Get doctorById
   viewDoctor = () => {
     let doctors = [];
     DoctorService.getDoctorById(this.state.search).then((res) => {
@@ -55,6 +59,7 @@ class Doctors extends Component {
   };
 
   render() {
+    //sorting doctors by doctorId
     const { search, sortColumn, doctors } = this.state;
     var sorted = [];
     if (search) {
@@ -69,6 +74,7 @@ class Doctors extends Component {
     console.log(this.state.doctors);
     console.log("Sorted..", sorted);
     return (
+      //form for doctor to search,add,update, delete
       <div className="w-75 mt-5 mx-auto">
         <div className="d-flex justify-content-between">
           <Link to="/doctors/addDoctor" className="btn btn-secondary btn-large mb-1">Add</Link>
@@ -112,9 +118,10 @@ class Doctors extends Component {
                 <td>{doctor.doctorFee}</td>
                 <td>
                   <Link to={`/doctors/updateDoctor/${doctor.doctorId}`}>
+                    {/* Button to update the doctor  */}
                     <button className="btn btn-secondary ml-0">Update</button>
                   </Link>
-
+                   {/* Button to delete the doctor  */}
                   <button
                     className="btn btn-danger ml-0 mt-1"
                     onClick={() => this.deleteDoctor(doctor.doctorId)}

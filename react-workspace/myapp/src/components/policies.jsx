@@ -5,6 +5,7 @@ import _ from "lodash";
 
 class Policies extends Component {
   state = {
+    //Creation of policy list
     policies_: [],
     sortColumn: { path: "title", order: "asc" },
     search: "",
@@ -16,6 +17,7 @@ class Policies extends Component {
       maximumAmount: "",
     },
   };
+  //Calling response for getAllPolicies
   componentDidMount() {
     PolicyService.getAllPolicies().then((res) => {
       console.log("data: ", res.data);
@@ -23,7 +25,7 @@ class Policies extends Component {
     });
     console.log("policies_: ", this.state.policies_);
   }
-
+  //Delete policy by id
   deletePolicy = (id) => {
     console.log("Delete policy with id: " + id);
     const policies_ = this.state.policies_.filter(
@@ -32,12 +34,11 @@ class Policies extends Component {
     this.setState({ policies_ });
     PolicyService.deletePolicy(id);
   };
-
+  //Viewpolicy by Id
   viewPolicy = () => {
     let policies_ = [];
     PolicyService.getByPolicyId(this.state.search).then((res) => {
       console.log("**data: ", res.data);
-      // this.setState({ policy: res.data });
       policies_ = res.data;
     });
     this.setState({ policies_ });
@@ -55,6 +56,7 @@ class Policies extends Component {
   };
 
   render() {
+    //sorting policies by policyId
     const { search, sortColumn, policies_ } = this.state;
     var sorted = [];
     if (search) {
@@ -70,12 +72,14 @@ class Policies extends Component {
     console.log("Sorted..", sorted);
 
     return (
+      //form for policy to search,add,update, delete
       <div className="w-75 mt-5 mx-auto">
         <div className="d-flex justify-content-between">
           <Link to="/policies/add" className="btn btn-secondary btn-large mb-1">
             Add
           </Link>
           <form class="form-inline my-2 my-lg-0">
+            {/* Search the policy by Id  */}
             <input
               className="form-control ml-auto"
               type="search"
@@ -108,8 +112,10 @@ class Policies extends Component {
                 <td>{policy.maximumAmount}</td>
                 <td>
                   <Link to={`/policies/update/${policy.policyId}`}>
+                    {/* Button to update the policy  */}
                     <button className="btn btn-secondary">Update</button>
                   </Link>
+                  {/* Button to delete the policy  */}
                   <button
                     className="btn btn-danger ml-2"
                     onClick={() => this.deletePolicy(policy.policyId)}

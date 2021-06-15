@@ -3,6 +3,7 @@ import FinanceService from "../services/financeService";
 
 class FinanceDetails extends Component {
   state = {
+     //Creation of finance list
     finance: {
       patientName: "",
       registrationFee: "",
@@ -11,19 +12,20 @@ class FinanceDetails extends Component {
       totalFee: "",
     },
   };
+  //Calling response for findByFinanceId
   componentDidMount() {
     FinanceService.findByFinanceId(this.props.match.params.financeId).then(
       (res) => this.setState({ finance: res.data })
     );
   }
-
+  //Handling the changes of the finance form
   handleChange = (event) => {
     event.preventDefault();
     const finance = this.state.finance;
     finance[event.currentTarget.name] = event.currentTarget.value;
     this.setState({ finance });
   };
-
+  //Calling response for update finance
   handleSubmit = (event) => {
     event.preventDefault();
     console.log(this.state.finance);
@@ -36,6 +38,7 @@ class FinanceDetails extends Component {
   };
 
   render() {
+    //Creation of form for update finance
     return (
       <div>
         <form onSubmit={this.handleSubmit} className="w-75 mx-auto">
@@ -109,9 +112,11 @@ class FinanceDetails extends Component {
               onChange={this.handleChange}
             />
           </div>
+          {/* Button for updating the  details of finance */}
           <button type="submit" className="btn btn-primary float-right">
             Save
           </button>
+          {/* Button to cancel the  details of finance */}
           <button
             className="btn btn-secondary mr-2 float-right"
             onClick={() => {

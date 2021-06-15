@@ -3,13 +3,15 @@ import DiseaseService from "../services/diseaseService";
 
 class AddDisease extends Component {
   state = {
+    //Creation of disease object
     disease: {
-        diseaseId: "",
-        diseaseName: "",
-        diseaseType: "",
-        diseaseSymptoms: "",
+      diseaseId: "",
+      diseaseName: "",
+      diseaseType: "",
+      diseaseSymptoms: "",
     },
   };
+  //Handling the submission and pushing the code to database
   handleSubmit = (event) => {
     event.preventDefault();
     console.log("Submitted");
@@ -17,6 +19,7 @@ class AddDisease extends Component {
       this.props.history.push("/diseases");
     });
   };
+  //Handling the changes of the disease form
   handleChange = (event) => {
     const disease = { ...this.state.disease };
     // dynamically handling event changes
@@ -24,6 +27,7 @@ class AddDisease extends Component {
     this.setState({ disease });
   };
   render() {
+    //Creation of form for add disease
     return (
       <div className="w-50 mx-auto">
         <form onSubmit={this.handleSubmit}>
@@ -80,7 +84,7 @@ class AddDisease extends Component {
               onChange={this.handleChange}
             />
           </div>
-
+          {/* Button to submit the  details of disease */}
           <button type="submit" className="btn btn-primary">
             Submit
           </button>
