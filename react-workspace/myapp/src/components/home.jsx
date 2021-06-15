@@ -143,17 +143,22 @@ class Home extends Component {
            </div>
          </div>
        <hr class="featurette-divider"></hr>
-
-       <div class="container">
-          <p class="float-end">
-            <NavLink className="nav-link" to="/">
-              Back to top
-            </NavLink>
-          </p>
-          <p>
-            © 2021 HSM <NavLink to="#">Privacy Terms</NavLink>
-          </p>
-        </div>
+       <div
+        class=" text-center bg-dark"
+        style={{
+          color: "white",
+          marginTop: "1rem",
+          padding: "1rem",
+          bottom: 0,
+          left: 0,
+          width: "100%",
+        }}
+      >
+        <p>
+          © 2021 HSM Group. All Rights Reserved
+          <NavLink to="#"> Privacy Terms</NavLink>
+        </p>
+      </div>
      </div>
     );
   }

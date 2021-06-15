@@ -98,7 +98,6 @@ class PatientHistory extends Component {
             <table className="table mt-3">
               <thead className="table-dark">
                 <tr>
-                  <th onClick={() => this.handleSort("patientHistoryId")}>Patient History Id</th>
                   <th onClick={() => this.handleSort("patientId")}>Patient Name</th>
                   <th onClick={() => this.handleSort("diseaseId")}>Disease Name</th>
                   <th onClick={() => this.handleSort("dietId")}>Diet Type</th>
@@ -109,7 +108,6 @@ class PatientHistory extends Component {
               <tbody>
                 { sorted.map((history) => (
                  <tr key={history.patientHistoryId}>
-                 <td>{history.patientHistoryId}</td>
                  <td>{history.patient.patientName}</td>
                  <td>{history.disease.diseaseName}</td>
                  <td>{history.diet.dietType}</td>

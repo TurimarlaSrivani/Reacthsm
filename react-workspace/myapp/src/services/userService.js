@@ -26,6 +26,6 @@ class UserService{
         async logout(userid){
                    return await axios.get(USER_API_BASE_URL+"/logout"+userid);
            }          
-        
+            
 }
 export default new UserService();

@@ -37,6 +37,11 @@ import Logout from './components/logout';
 import Admin from './components/admin';
 import Adminsidebar from "./components/adminpage/adminsidebar";
 import AdminHome from './components/adminpage/adminhome';
+import About from "./components/userEnd/about";
+import OurServices from "./components/userEnd/ourServices";
+import Contact from "./components/userEnd/contact";
+import Gallery from "./components/userEnd/gallery";
+import Footer from "./components/userEnd/footer";
 
 function App() {
   return (
@@ -84,6 +89,10 @@ function App() {
           <Route path= "/create-user" exact component = {createUser}></Route>
           <Route path= "/update-user/:userid" exact component = {UpdateUser}></Route>
           <Route path= "/view-user/:userid" exact component = {ViewUser}></Route>
+          <Route path="/about" component={About} />
+          <Route path="/ourServices" component={OurServices} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/gallery" component={Gallery} />
           <Route path="/logout" component={Logout} />
           <Route path="/admin" component={Admin} />
           <Route path="/adminhome" component={AdminHome} />
