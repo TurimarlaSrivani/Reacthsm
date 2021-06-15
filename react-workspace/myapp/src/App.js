@@ -42,6 +42,9 @@ import OurServices from "./components/userEnd/ourServices";
 import Contact from "./components/userEnd/contact";
 import Gallery from "./components/userEnd/gallery";
 import Footer from "./components/userEnd/footer";
+import Teams from "./components/userEnd/teams";
+import Treatment from "./components/userEnd/treatment";
+import Blogs from "./components/userEnd/blogs";
 
 function App() {
   return (
@@ -93,6 +96,9 @@ function App() {
           <Route path="/ourServices" component={OurServices} />
           <Route path="/contact" component={Contact} />
           <Route path="/gallery" component={Gallery} />
+          <Route path="/teams" component={Teams} />
+          <Route path="/treatment" component={Treatment} />
+          <Route path="/blogs" component={Blogs} />
           <Route path="/logout" component={Logout} />
           <Route path="/admin" component={Admin} />
           <Route path="/adminhome" component={AdminHome} />

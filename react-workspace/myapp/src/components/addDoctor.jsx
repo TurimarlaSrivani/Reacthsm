@@ -3,6 +3,7 @@ import DoctorService from "../services/doctorService";
 
 class AddDoctor extends Component {
   state = {
+    //Creation of doctor object
     doctor: {
       doctorId: "",
       doctorName: "",
@@ -14,7 +15,7 @@ class AddDoctor extends Component {
       doctorFee: "",
     },
   };
-
+ //Handling the submission and pushing the code to database
   handleSubmit = (event) => {
     event.preventDefault();
     console.log("Submitted");
@@ -22,12 +23,14 @@ class AddDoctor extends Component {
       this.props.history.push("/doctors");
     });
   };
+  //Handling the changes of the doctor form
   handleChange = (event) => {
     const doctor = { ...this.state.doctor };
     doctor[event.currentTarget.name] = event.currentTarget.value;
     this.setState({ doctor });
   };
   render() {
+    //Creation of form for add doctor
     return (
       <div className="w-50 mx-auto">
         <form onSubmit={this.handleSubmit}>
@@ -137,6 +140,7 @@ class AddDoctor extends Component {
               onChange={this.handleChange}
             />
           </div>
+          {/* Button to submit the  details of doctor */}
           <button type="submit" className="btn btn-primary">
             Submit
           </button>

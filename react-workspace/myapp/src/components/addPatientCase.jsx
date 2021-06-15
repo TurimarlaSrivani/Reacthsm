@@ -4,6 +4,7 @@ import PatientCaseService from "../services/patientCaseService";
 
 class AddPatientCase extends Component{
     state={
+       //Creation of patientCase object
         patientCase:{
             patientCaseId: "",
             medicines: "",
@@ -16,6 +17,7 @@ class AddPatientCase extends Component{
 
         },
     };
+    //Handling the submission and pushing the code to database
     handleSubmit=(event)=>{
         event.preventDefault();
         console.log("Submitted");
@@ -24,6 +26,7 @@ class AddPatientCase extends Component{
 
         });
     };
+     //Handling the changes of the patientCase form
     handleChange=(event)=>{
         const patientCase={...this.state.patientCase};
         //dynamically handling event changes
@@ -31,6 +34,7 @@ class AddPatientCase extends Component{
         this.setState({patientCase});
     };
     render(){
+      //Creation of form for add patientCase
         return(
             <div className="w-50 mx-auto">
                 <form onSubmit={this.handleSubmit}>
@@ -152,8 +156,8 @@ class AddPatientCase extends Component{
                           autoFocus
                         />
                     
-            </div>
-
+                     </div>
+                    {/* Button to submit the  details of patientCase */}
                     <button type="submit" className="btn btn-primary">
                         Submit
                     </button>     

@@ -3,6 +3,7 @@ import PolicyService from "../services/policyService";
 
 class PolicyDetails extends Component {
   state = {
+    //Creation of policy object
     policy: {
       policyId: "",
       policyName: "",
@@ -11,12 +12,14 @@ class PolicyDetails extends Component {
       maximumAmount: "",
     },
   };
+  //Calling response for getByPolicyId
   componentDidMount() {
     PolicyService.getByPolicyId(this.props.match.params.id).then((res) =>
       this.setState({ policy: res.data })
     );
   }
 
+  //Handling the changes of the policy form
   handleChange = (event) => {
     event.preventDefault();
     const policy = this.state.policy;
@@ -24,6 +27,7 @@ class PolicyDetails extends Component {
     this.setState({ policy });
   };
 
+  //Handling the submission and pushing the code to database
   handleSubmit = (event) => {
     event.preventDefault();
     console.log(this.state.policy);
@@ -36,11 +40,11 @@ class PolicyDetails extends Component {
     });
   };
   render() {
+    //Creation of form for update policy
     return (
       <div>
         <form onSubmit={this.handleSubmit} className="w-75 mx-auto">
           <h1>{this.props.match.params.id}</h1>
-
           <div className="mb-3">
             <label htmlFor="name" className="form-label">
               PolicyName
@@ -94,9 +98,11 @@ class PolicyDetails extends Component {
               onChange={this.handleChange}
             />
           </div>
+          .{/* Button for saving the updated details of policy */}
           <button type="submit" className="btn btn-primary float-right">
             Save
           </button>
+          {/* Button to cancel the  details of policy */}
           <button
             className="btn btn-secondary mr-2 float-right"
             onClick={() => {

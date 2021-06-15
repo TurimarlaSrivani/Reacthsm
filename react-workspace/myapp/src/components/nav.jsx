@@ -37,10 +37,28 @@ const Nav = () => {
                 <strong>Services</strong>
               </NavLink>
             </li>
+            
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/teams">
+                <strong>Teams</strong>
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/treatment">
+                <strong>Treatment</strong>
+              </NavLink>
+            </li>
 
             <li className="nav-item">
               <NavLink className="nav-link" to="/gallery">
                 <strong>Gallery</strong>
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/blogs">
+                <strong>Blogs</strong>
               </NavLink>
             </li>
 

@@ -5,6 +5,7 @@ import _ from "lodash";
 
 class Diseases extends Component {
   state = {
+    //Creation of disease list
     diseases: [],
     sortColumn: { path: "title", order: "asc" },
     search: "",
@@ -15,6 +16,7 @@ class Diseases extends Component {
       diseaseSymptoms: "",
     },
   };
+  //Calling response for getAllDiseases
   componentDidMount() {
     DiseaseService.getAllDiseases().then((res) => {
       console.log("data: ", res.data);
@@ -22,7 +24,7 @@ class Diseases extends Component {
     });
     console.log("diseases: ", this.state.diseases);
   }
-
+  //Delete disease by id
   deleteDisease = (id) => {
     console.log("Delete student with id: " + id);
     const diseases = this.state.diseases.filter(
@@ -31,7 +33,7 @@ class Diseases extends Component {
     this.setState({ diseases });
     DiseaseService.deleteDisease(id);
   };
-
+  // View disease By Name
   viewDisease = () => {
     let diseases = [];
     DiseaseService.findByDiseaseName(this.state.search).then((res) => {
@@ -53,7 +55,8 @@ class Diseases extends Component {
     this.setState({ search: event.target.value });
   };
 
- render() {
+  render() {
+    //sorting diseases by diseaseName
     const { search, sortColumn, diseases } = this.state;
     var sorted = [];
     if (search) {
@@ -68,6 +71,7 @@ class Diseases extends Component {
     console.log(this.state.diseases);
     console.log("Sorted..", sorted);
     return (
+      //form for disease to search,add,update, delete
       <div className="w-75 mt-5 mx-auto">
         <div className="d-flex justify-content-between">
           <Link to="/diseases/add" className="btn btn-secondary btn-large mb-1">
@@ -81,16 +85,17 @@ class Diseases extends Component {
               aria-label="Search"
               onChange={this.onChange}
             />
-            
           </form>
         </div>
         <h2 className="text-center">Disease List</h2>
-        <table className="table mt-3">
+        <table className="table mt-3 shadow">
           <thead className="table-dark">
             <tr>
               <th onClick={() => this.handleSort("diseaseName")}>Name</th>
               <th onClick={() => this.handleSort("diseaseType")}>Type</th>
-              <th onClick={() => this.handleSort("diseaseSymptoms")}>Symptoms</th>
+              <th onClick={() => this.handleSort("diseaseSymptoms")}>
+                Symptoms
+              </th>
               <th colSpan="2">Action</th>
             </tr>
           </thead>
@@ -102,9 +107,10 @@ class Diseases extends Component {
                 <td>{disease.diseaseSymptoms}</td>
                 <td>
                   <Link to={`/diseases/update/${disease.diseaseId}`}>
+                    {/* Button to update the disease  */}
                     <button className="btn btn-secondary">Update</button>
                   </Link>
-
+                  {/* Button to delete the disease  */}
                   <button
                     className="btn btn-danger ml-2"
                     onClick={() => this.deleteDisease(disease.diseaseId)}
@@ -113,7 +119,7 @@ class Diseases extends Component {
                   </button>
                 </td>
               </tr>
-            ))} 
+            ))}
           </tbody>
         </table>
       </div>

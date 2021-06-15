@@ -77,7 +77,7 @@ render(){
                                       </small>
                                   </div>
                                   <div className="form-group">
-                                  <i class="fas fa-user-tag"> ROLE</i>
+                                  <label>Role</label>
                                   <select defaultValue ="" className= "form-control"name="userRole" value={this.state.userRole} onChange={this.changeUserRoleHandler}>
                                      <option value="">Select Role</option> 
                                      <option value="admin">Admin</option>

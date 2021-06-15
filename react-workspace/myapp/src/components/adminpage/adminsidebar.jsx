@@ -57,7 +57,7 @@ const Adminsidebar = () => {
         <SidebarContent>
           <Menu iconShape="square" maxMenuHeight={250}>
             <MenuItem active={true} icon={<FiHome />}>
-              <Link to="/home"></Link>
+              <Link to="/adminhome"></Link>
               Dashboard
             </MenuItem>
             <SubMenu title="Doctor" icon={<FaBriefcaseMedical />}>
