@@ -1,5 +1,6 @@
 import React,{ Component } from 'react'
 import UserService from '../services/userService'
+import {NavLink} from 'react-router-dom'
   
 class Register extends Component{
     constructor(props){
@@ -11,7 +12,8 @@ class Register extends Component{
             lastname:'',
             email:'',
             password:'',
-            mobileNumber:''
+            mobileNumber:'',
+            role:''
         }
         this.changeUserIdHandler=this.changeUserIdHandler.bind(this);
         this.changeFirstNameHandler=this.changeFirstNameHandler.bind(this);
@@ -19,11 +21,27 @@ class Register extends Component{
         this.changeEmailHandler=this.changeEmailHandler.bind(this);
         this.changePasswordHandler=this.changePasswordHandler.bind(this);
         this.changeMobileNumberHandler=this.changeMobileNumberHandler.bind(this);
+        this.changeRoleHandler=this.changeRoleHandler.bind(this);
         this.saveUser=this.saveUser.bind(this);
     }
     saveUser= (e) =>{
         e.preventDefault();
-        let user ={userid:this.state.userid,firstname:this.state.firstname,lastname:this.state.lastname,email:this.state.email,password:this.state.password,mobileNumber:this.state.mobileNumber};
+        let user ={
+            email:this.state.email,
+         firstName:this.state.firstName,
+         lastName:this.state.lastName,
+         login:{
+            loggedIn:'false',
+            password:this.state.password,
+            userId:this.state.userId,
+            role:this.state.role
+         },
+         mobileNumber:this.state.mobileNumber,
+         password:this.state.password,
+         userId:this.state.userId,
+         role:this.state.role
+ };
+
         console.log('user => '+JSON.stringify(user));
 
         UserService.createUser(user).then(res => {
@@ -49,6 +67,11 @@ class Register extends Component{
     changeMobileNumberHandler =(event) => {
         this.setState({mobileNumber:event.target.value});
     }
+
+    changeRoleHandler =(event) => {
+        this.setState({role:event.target.value});
+    }
+
     cancel(){
         this.props.history.push('/login');
     }
@@ -97,6 +120,10 @@ render(){
                                       <label>MobileNumber</label>
                                       <input placeholder="MobileNumber" name="mobileNumber" className="form-control" value={this.state.mobileNumber} onChange={this.changeMobileNumberHandler}/>
                                   </div>
+                                  <div className="col">
+                                  <i class="fas fa-user-tag"> <b>ROLE</b></i>
+                                  <input placeholder="Enter Your Role" name="role" className="form-control" value={this.state.role} onChange={this.changeRoleHandler}/>
+                                  </div>
                                   <button className="btn btn-success" onClick={this.saveUser}>Register</button>
                                   <button className="btn btn-danger"  onClick={this.cancel.bind(this)} style={{marginLeft:"10px"}}>Cancel</button>
                               </form>
@@ -105,6 +132,23 @@ render(){
                 </div>
             </div>
         </div>
+        <br></br>
+        <div
+        class=" text-center bg-dark"
+        style={{
+          color: "white",
+          marginTop: "1rem",
+          padding: "1rem",
+          bottom: 0,
+          left: 0,
+          width: "100%",
+        }}
+      >
+        <p>
+          © 2021 HSM Group. All Rights Reserved
+          <NavLink to="#"> Privacy Terms</NavLink>
+        </p>
+      </div>
         </div>
     )
 }

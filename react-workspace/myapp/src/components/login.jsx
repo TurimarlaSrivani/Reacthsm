@@ -1,6 +1,6 @@
 import React,{ Component } from 'react'
 import UserService from '../services/userService'
-import { Link } from "react-router-dom";
+import { NavLink,Link } from "react-router-dom";
   
 class Login extends Component{
     constructor(props){
@@ -8,20 +8,30 @@ class Login extends Component{
 
         this.state={
             userid:'',
-            password:''
-    
+            password:'',
+            userRole:'',
         }
         this.changeUserIdHandler=this.changeUserIdHandler.bind(this);
         this.changePasswordHandler=this.changePasswordHandler.bind(this);
+        this.changeUserRoleHandler=this.changeUserRoleHandler.bind(this);
         this.saveUser=this.saveUser.bind(this);
     }
     saveUser= (e) =>{
         e.preventDefault();
-        let loginentity ={userid:this.state.userid,password:this.state.password};
+        console.log('userRole=>'+this.state.userRole);
+        let loginentity ={userid:this.state.userid,password:this.state.password,userRole:this.state.userRole};
         console.log('loginentity => '+JSON.stringify(loginentity));
 
         UserService.login(loginentity).then(res => {
-           this.props.history.push(`/Home`);
+            localStorage.setItem('userid',this.state.userid)
+            if (this.state.userRole === "admin"){
+             
+           this.props.history.push(`/adminhome`);
+            }
+            else if(this.state.userRole==="user"){
+             
+                this.props.history.push(`/home`);
+                }
         });
     }
     changeUserIdHandler =(event) =>{
@@ -29,6 +39,11 @@ class Login extends Component{
     }
     changePasswordHandler =(event) =>{
         this.setState({password:event.target.value});
+    }
+
+    changeUserRoleHandler =(event) =>{
+        console.log('event=>'+event.target.value)
+        this.setState({userRole:event.target.value});
     }
     
 render(){
@@ -40,7 +55,7 @@ render(){
                 src="https://image.freepik.com/free-photo/perspective-exterior-nobody-empty-box_1258-260.jpg"
                 className = "center"
                 width="100%"
-                height="800px"
+                height="600px"
                 alt="crop"
               /></div>
         <div>
@@ -57,8 +72,19 @@ render(){
                                   <div className="form-group">
                                       <label>Password</label>
                                       <input placeholder="Password"type ="Password"name="password" className="form-control" value={this.state.password} onChange={this.changePasswordHandler}/>
+                                      <small id="password" className="form-text text-muted">
+                                       We'll never share your password with anyone else.
+                                      </small>
                                   </div>
-                                  <button className="btn btn-success" onClick={this.saveUser}>Login</button>
+                                  <div className="form-group">
+                                  <i class="fas fa-user-tag"> ROLE</i>
+                                  <select defaultValue ="" className= "form-control"name="userRole" value={this.state.userRole} onChange={this.changeUserRoleHandler}>
+                                     <option value="">Select Role</option> 
+                                     <option value="admin">Admin</option>
+                                      <option value="user">User</option>
+                                  </select>
+                                  </div>
+                                  <button disabled={!this.state.userRole} className="btn btn-primary" onClick={this.saveUser}>Login</button>
                                   <div className="mt-2 text-center">
                                  <small>
                                      New user? <Link to="/register">SignUp</Link>
@@ -70,6 +96,26 @@ render(){
                 </div>
             </div>
         </div>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <div
+        class=" text-center bg-dark"
+        style={{
+          color: "white",
+          marginTop: "1rem",
+          padding: "1rem",
+          bottom: 0,
+          left: 0,
+          width: "100%",
+        }}
+      >
+        <p>
+          © 2021 HSM Group. All Rights Reserved
+          <NavLink to="#"> Privacy Terms</NavLink>
+        </p>
+      </div>
         </div>
     )
 }
